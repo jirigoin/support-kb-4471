@@ -4,7 +4,7 @@ title: '#4471 · two problems, not one'
 owner: jirigoin
 status: closed
 reviewed: 2026-11-01
-signature: jirigoin
+signature: v1.eyJzdWIiOiI1NDk3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM1NDQzNzksImV4cCI6MTc5MzYzMDc3OX0.212Z7B0FC3NxBS76teklHAWRdTwe0l6__QJ6jwVw_YY
 ---
 
 <script>
