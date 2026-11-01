@@ -45,13 +45,13 @@ with its own count.</p>
 <aside class="warn">The queued parser fix closes only the first problem. The form hint and the one-day move stay
 broken after it ships.</aside>
 <h2>The problems in #4471</h2>
-<p class="sum"><strong>412</strong> reports in #4471 (15 repeated rows in the export, counted once) · <strong>3</strong> problems</p>
+<p class="sum"><strong>412</strong> reports in #4471 (15 repeated rows in the export, counted once) · <strong>3</strong> problems, counted the desk's way: each report under its tenant's cause, and the reports the desk read as a one-day move also on their own row.</p>
 <table><thead><tr><th>problem</th><th>reports</th><th>channels</th><th>tenants</th><th>seen</th><th>ticket</th></tr></thead><tbody>
-<tr><td><code>parser</code><br><span class="title">Shared parser reads every date month first</span></td><td><strong>374</strong></td><td class="small">app ×202 · email ×147 · form ×25</td><td class="small">11: alder.physio, copper.studio, harbour.dental, kettle.books, lantern.row, long.table, morrow.tax, nine.lanterns, pale.harbour, ridge.clinic, stone.and.sons</td><td class="small">2026-04-01 → 2026-10-04</td><td><a href="https://github.com/jirigoin/support-kb-4471/issues/1">#1</a></td></tr>
+<tr><td><code>parser</code><br><span class="title">Shared parser reads every date month first</span></td><td><strong>379</strong></td><td class="small">app ×204 · email ×150 · form ×25</td><td class="small">11: alder.physio, copper.studio, harbour.dental, kettle.books, lantern.row, long.table, morrow.tax, nine.lanterns, pale.harbour, ridge.clinic, stone.and.sons</td><td class="small">2026-04-01 → 2026-10-04</td><td><a href="https://github.com/jirigoin/support-kb-4471/issues/1">#1</a></td></tr>
 <tr><td><code>hint</code><br><span class="title">booking-v3 form prints an MM/DD/YYYY hint to day-first tenants</span></td><td><strong>33</strong></td><td class="small">form ×33</td><td class="small">3: alder.physio, copper.studio, pale.harbour</td><td class="small">2026-04-17 → 2026-09-22</td><td><a href="https://github.com/jirigoin/support-kb-4471/issues/2">#2</a></td></tr>
-<tr><td><code>one-day</code><br><span class="title">Dates move by one day (time zone), not by a day/month swap</span></td><td><strong>5</strong></td><td class="small">email ×3 · app ×2</td><td class="small">5: alder.physio, kettle.books, lantern.row, nine.lanterns, pale.harbour</td><td class="small">2026-04-02 → 2026-10-04</td><td><a href="https://github.com/jirigoin/support-kb-4471/issues/3">#3</a></td></tr>
+<tr><td><code>one-day</code><br><span class="title">Dates move by one day (time zone), not by a day/month swap</span></td><td><strong>5</strong><br><span class="small">also filed under parser ×5</span></td><td class="small">email ×3 · app ×2</td><td class="small">5: alder.physio, kettle.books, lantern.row, nine.lanterns, pale.harbour</td><td class="small">2026-04-02 → 2026-10-04</td><td><a href="https://github.com/jirigoin/support-kb-4471/issues/3">#3</a></td></tr>
 </tbody></table>
-<p class="small">Intake tagged 43 of these reports with a different cause than the one their tenant and channel point to.</p>
+<p class="small">Intake tagged 38 of these reports with a different cause than the one their tenant and channel point to.</p>
 <h2>How they differ</h2>
 <ul>
 <li><strong><code>parser</code></strong>: the shared parser reads every date month first. A day-first tenant&#39;s date comes
@@ -63,7 +63,8 @@ tenants hits it.</li>
 <li><strong><code>one-day</code></strong>: the date moves by exactly one day, not a swap. The invite arrives before the
 booking; Lisbon and Toronto see different days for one meeting; only June is off. That is a
 time-zone conversion, and no date-order fix touches it. The desk had already read these
-reports as a one-day move (<code>desk-notes.json</code>) but left them filed under the parser.</li>
+reports as a one-day move (<code>desk-notes.json</code>). They stay counted where the desk files them,
+under the parser, and count again here as their own problem.</li>
 </ul>
 <h2>Why one ticket hid them</h2>
 <p><a href="/kb/decisions/0001-dedupe-by-subject">Decision 0001</a> merges on subject alone, and every one of

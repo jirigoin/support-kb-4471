@@ -40,7 +40,8 @@ broken after it ships.
 - **`one-day`**: the date moves by exactly one day, not a swap. The invite arrives before the
   booking; Lisbon and Toronto see different days for one meeting; only June is off. That is a
   time-zone conversion, and no date-order fix touches it. The desk had already read these
-  reports as a one-day move (`desk-notes.json`) but left them filed under the parser.
+  reports as a one-day move (`desk-notes.json`). They stay counted where the desk files them,
+  under the parser, and count again here as their own problem.
 
 ## Why one ticket hid them
 
