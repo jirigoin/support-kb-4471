@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471 · three problems, not one'
+title: '#4471 · two problems, not one'
 owner: jirigoin
 status: closed
 reviewed: 2026-11-01
@@ -13,16 +13,16 @@ signature: jirigoin
   import Callout from '#lib/kb/Callout.svelte';
 
   const repo = 'https://github.com/jirigoin/support-kb-4471/issues';
-  const issues = { parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` };
+  const issues = { parser: `${repo}/1`, hint: `${repo}/2` };
 </script>
 
-[#4471](/kb/incidents/4471) says one bug, one fix queued. The reports say otherwise. Read by
-tenant, channel and body, they describe three different failures. Each now has its own ticket
-with its own count.
+[#4471](/kb/incidents/4471) says one bug, one fix queued. The reports say otherwise. Tied to a
+cause the way the desk's code ties them (`causeOf`: the tenant's locale and form, and the
+channel), they split into two problems. Each now has its own ticket with its own count.
 
 <Callout kind="warn">
-The queued parser fix closes only the first problem. The form hint and the one-day move stay
-broken after it ships.
+The parser fix closes only `parser`. The `hint` reports come from booking-v3's form, which no
+parser fix touches.
 </Callout>
 
 ## The problems in #4471
@@ -37,11 +37,9 @@ broken after it ships.
   tenants. People type what the hint says, and the form reads it the tenant's way. The swap looks
   the same, but the fix is in the form, not the parser. Only the form channel of booking-v3
   tenants hits it.
-- **`one-day`**: the date moves by exactly one day, not a swap. The invite arrives before the
-  booking; Lisbon and Toronto see different days for one meeting; only June is off. That is a
-  time-zone conversion, and no date-order fix touches it. The desk had already read these
-  reports as a one-day move (`desk-notes.json`). They stay counted where the desk files them,
-  under the parser, and count again here as their own problem.
+
+A note on five `parser` reports: the desk read them as a one-day move (`desk-notes.json`), not a
+day/month swap. They belong to `parser` by tenant and are counted there, once.
 
 ## Why one ticket hid them
 
@@ -52,8 +50,7 @@ locale and form, and in the body.
 
 ## What changes
 
-- Count each problem on its own ticket. #4471 keeps the parser reports.
-- Ship the form hint fix with the parser fix, or booking-v3 tenants keep sending swaps.
-- Give the one-day move an owner on the time-zone side.
+- Count each cause on its own ticket: `parser` on #1, `hint` on #2.
+- Tie a report to a cause by its tenant and channel, not by its subject or intake's tag.
 
 <RenderStamp {signature} />

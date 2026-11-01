@@ -42,4 +42,4 @@ Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
 - `src/routes/kb/incidents/4471-split/+page.svx` — the signed page: #4471 split into three problems.
 - `src/lib/kb/problems.ts`, `src/lib/kb/ProblemTable.svelte` — the logic and table behind its numbers.
 - `rendered/kb/incidents/4471-split/index.html` — the page as the desk sees it.
-- `tickets/` — the text of the three issues filed in this repo.
+- `tickets/` — the text of the two issues filed in this repo.

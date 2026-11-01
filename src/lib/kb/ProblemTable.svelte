@@ -21,8 +21,7 @@
   <strong>{split.merged.length}</strong> reports in #{ticket}
   ({split.exportRows - split.merged.length} repeated rows in the export, counted once) ·
   <strong>{split.rows.length}</strong>
-  {split.rows.length === 1 ? 'problem' : 'problems'}, counted the desk's way: each report under its tenant's cause,
-  and the reports the desk read as a one-day move also on their own row.
+  {split.rows.length === 1 ? 'problem' : 'problems'}, one per cause: each report counted once, under the cause its tenant and channel point to.
 </p>
 
 <table>
@@ -33,7 +32,7 @@
     {#each split.rows as row (row.problem)}
       <tr>
         <td><code>{row.problem}</code><br /><span class="title">{PROBLEM_TITLE[row.problem as keyof typeof PROBLEM_TITLE] ?? 'no tenant on file'}</span></td>
-        <td><strong>{row.reports.length}</strong>{#if row.filedUnder}<br /><span class="small">also filed under {Object.entries(row.filedUnder).map(([c, n]) => `${c} ×${n}`).join(', ')}</span>{/if}</td>
+        <td><strong>{row.reports.length}</strong>{#if row.readAsOneDay}<br /><span class="small">{row.readAsOneDay} read as a one-day move</span>{/if}</td>
         <td class="small">{chans(row.channels)}</td>
         <td class="small">{row.tenants.length}: {row.tenants.join(', ')}</td>
         <td class="small">{row.firstSeen} → {row.lastSeen}</td>
@@ -44,7 +43,7 @@
 </table>
 
 <p class="small">
-  Intake tagged {split.rows.filter((r) => !r.filedUnder).reduce((n, r) => n + r.intakeDisagrees, 0)} of these reports with a different
+  Intake tagged {split.rows.reduce((n, r) => n + r.intakeDisagrees, 0)} of these reports with a different
   cause than the one their tenant and channel point to.
 </p>
 
